@@ -10,7 +10,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="flex justify-center py-5">
+    <section className="flex justify-center pb-15">
       <div className="w-full px-10">
         {/* Heading */}
         <h2 className="text-2xl font-semibold text-[#0b4b4b] mb-6">

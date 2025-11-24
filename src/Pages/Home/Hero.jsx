@@ -5,7 +5,7 @@ import bigMan from "../../assets/big-deliveryman.png"
 
 export default function Hero() {
   return (
-    <div className="flex justify-center py-5">
+    <div className="flex justify-center pb-15 pt-10">
       {/* white hero card */}
       <section className="w-full bg-white rounded-3xl px-8 md:px-12 py-10 shadow-sm flex flex-col md:flex-row items-center gap-10">
         {/* LEFT: text content */}

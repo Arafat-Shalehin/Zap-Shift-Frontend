@@ -40,7 +40,7 @@ export default function OurServices() {
   const [activeId, setActiveId] = useState(0);
 
   return (
-    <section className="w-full flex justify-center py-10">
+    <section className="w-full flex justify-center pb-15">
       <div className="w-full bg-[#003c3c] rounded-3xl py-10 px-6 md:px-12 text-center text-white">
         {/* Heading */}
         <h2 className="text-2xl md:text-3xl font-semibold mb-2">Our Services</h2>
