@@ -1,6 +1,7 @@
 // Navbar.jsx
 import { FiArrowUpRight } from "react-icons/fi";
-import logo from '../../assets/logo.png';
+import logo from "../../assets/logo.png";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
@@ -26,19 +27,20 @@ export default function Navbar() {
             "Blog",
             "Contact",
           ].map((item) => (
-            <button
-              key={item}
-              className="hover:text-gray-800 transition-colors duration-150"
-            >
-              {item}
-            </button>
+            <Link key={item} to={`/${item}`}>
+              <button className="hover:text-gray-800 transition-colors duration-150">
+                {item}
+              </button>
+            </Link>
           ))}
         </div>
 
         {/* Right buttons */}
         <div className="flex items-center gap-2">
-          <button className="px-5 py-2 text-sm text-gray-700 border 
-          border-gray-300 md:ml-2 lg:ml-0 rounded-xl bg-white hover:bg-gray-50">
+          <button
+            className="px-5 py-2 text-sm text-gray-700 border 
+          border-gray-300 md:ml-2 lg:ml-0 rounded-xl bg-white hover:bg-gray-50"
+          >
             Sign In
           </button>
 
