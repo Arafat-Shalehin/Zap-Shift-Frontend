@@ -12,9 +12,9 @@ export default function Navbar() {
           {/* green mark */}
           {/* <span className="w-6 h-6 bg-lime-400 rounded-tl-3xl rounded-br-3xl -rotate-12 inline-block" /> */}
           <img src={logo} alt="Logo" />
-          <span className="mt-3 md:mr-2 -ms-4.5 text-xl font-semibold tracking-wide text-gray-900">
+          <a href="/" className="mt-3 md:mr-2 -ms-4.5 text-xl font-semibold tracking-wide text-gray-900">
             ZapShift
-          </span>
+          </a>
         </div>
 
         {/* Center links */}
