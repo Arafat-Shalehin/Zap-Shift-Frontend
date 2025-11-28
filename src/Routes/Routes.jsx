@@ -8,12 +8,19 @@ import Register from "../Pages/AuthPages/Register";
 import Rider from "../Pages/RoutePages/Rider";
 import PrivateRoute from "./PrivateRoute";
 import PricingCalculator from "../Pages/RoutePages/PricingCalculator";
+import AboutUs from "../Pages/RoutePages/AboutUs";
+import Error404 from "../Pages/Shared/Error404";
+import SendParcelForm from "../Pages/RoutePages/SendParcelForm";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayouts,
     children: [
+      {
+        path: "*",
+        element: <Error404 />,
+      },
       {
         index: true,
         Component: App,
@@ -27,19 +34,33 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "Send Parcel",
+        element: (
+          <PrivateRoute>
+            <SendParcelForm></SendParcelForm>
+          </PrivateRoute>
+        ),
+        loader: () => fetch("/warehouses.json").then((res) => res.json()),
+      },
+      {
         path: "Coverage",
         Component: Coverage,
         loader: () => fetch("/warehouses.json").then((res) => res.json()),
       },
       {
+        path: "About Us",
+        Component: AboutUs,
+      },
+      {
         path: "Pricing",
-        Component: PricingCalculator
-      }
+        Component: PricingCalculator,
+      },
     ],
   },
   {
     path: "/",
     Component: AuthLayout,
+    errorElement: <Error404 />,
     children: [
       {
         path: "login",

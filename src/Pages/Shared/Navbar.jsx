@@ -1,7 +1,7 @@
 // Navbar.jsx
 import { FiArrowUpRight } from "react-icons/fi";
 import logo from "../../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { toast } from "react-toastify";
 
@@ -40,17 +40,23 @@ export default function Navbar() {
         <div className="hidden md:flex items-center lg:gap-8 gap-4 text-sm text-gray-500">
           {[
             "Services",
-            "Coverage",
+            "Send Parcel",
             "About Us",
             "Pricing",
             "Blog",
             "Contact",
           ].map((item) => (
-            <Link key={item} to={`/${item}`}>
-              <button className="hover:text-gray-800 transition-colors duration-150">
-                {item}
-              </button>
-            </Link>
+            <NavLink
+              key={item}
+              to={`/${item}`}
+              className={({ isActive }) =>
+                `hover:text-gray-800 transition-colors duration-150 ${
+                  isActive && "font-bold border-b"
+                }`
+              }
+            >
+              {item}
+            </NavLink>
           ))}
         </div>
 

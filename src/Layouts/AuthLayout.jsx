@@ -2,11 +2,13 @@
 import React from "react";
 import { Outlet } from "react-router";
 import authImg from "../assets/authImage.png";
+import ScrollToTop from "../Pages/Shared/ScrollToTop";
 
 const AuthLayout = () => {
   return (
     <div className="min-h-screen bg-white">
       <div className="mx-auto flex flex-col-reverse md:flex-row  min-h-screen max-w-7xl border border-gray-300 shadow rounded">
+        <ScrollToTop/>
         {/* Left: form (Outlet) */}
         <div className="flex-1 bg-white">
           <main className="h-full">

@@ -5,7 +5,8 @@ import {
   FaFacebookF,
   FaYoutube,
 } from "react-icons/fa6";
-import logo from '../../assets/logo.png';
+import logo from "../../assets/logo.png";
+import { NavLink } from "react-router";
 
 export default function Footer() {
   return (
@@ -45,12 +46,17 @@ export default function Footer() {
             "Blog",
             "Contact",
           ].map((item) => (
-            <button
+            <NavLink
               key={item}
-              className="hover:text-white transition-colors duration-150"
+              to={`/${item}`}
+              className={({ isActive }) =>
+                `hover:text-white transition-colors duration-150 ${
+                  isActive && "font-bold"
+                }`
+              }
             >
               {item}
-            </button>
+            </NavLink>
           ))}
         </nav>
 
