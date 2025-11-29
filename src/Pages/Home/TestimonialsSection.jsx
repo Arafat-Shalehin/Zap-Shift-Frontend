@@ -1,7 +1,7 @@
 // TestimonialsSection.jsx
 import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import "swiper/css";
 import quote from "../../assets/reviewQuote.png";
@@ -81,7 +81,8 @@ export default function TestimonialsSection() {
         {/* Swiper slider */}
         <div className="mt-8">
           <Swiper
-            modules={[Navigation]}
+            modules={[Navigation, Autoplay]}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
             onSwiper={(swiper) => (swiperRef.current = swiper)}
             onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
             loop={true}

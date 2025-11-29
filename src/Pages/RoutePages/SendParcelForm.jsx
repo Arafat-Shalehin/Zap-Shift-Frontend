@@ -4,6 +4,8 @@ import toast, { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useAuth from "../../Hooks/useAuth";
 
 export default function SendParcelForm() {
   const {
@@ -12,6 +14,9 @@ export default function SendParcelForm() {
     watch,
     formState: { errors },
   } = useForm();
+
+  const axiosSecure = useAxiosSecure();
+  const {user} = useAuth();
 
   const serviceCenters = useLoaderData();
   //   console.log(serviceCenters);
@@ -81,6 +86,10 @@ export default function SendParcelForm() {
       confirmButtonText: "Yes!",
     }).then((result) => {
       if (result.isConfirmed) {
+        axiosSecure.post("/parcels", data)
+        .then(res => {
+          console.log("After saving parcels", res.data);
+        })
         toast.success("Parcel will be sent to designated location.");
       }
     });
@@ -178,6 +187,7 @@ export default function SendParcelForm() {
                     className={inputClass}
                     onChange={handleChange}
                     {...register("senderName")}
+                    defaultValue={user?.displayName}
                   />
                 </div>
                 <div>
@@ -192,14 +202,26 @@ export default function SendParcelForm() {
                   />
                 </div>
                 <div>
-                  <p className={labelClass}>Sender Phone No</p>
+                  <p className={labelClass}>Sender Contact No</p>
                   <input
                     required
                     type="text"
-                    placeholder="Sender Phone No"
+                    placeholder="Sender Phone"
                     className={inputClass}
                     onChange={handleChange}
                     {...register("senderPhone")}
+                  />
+                </div>
+                <div>
+                  <p className={labelClass}>Sender Email Address</p>
+                  <input
+                    required
+                    type="email"
+                    placeholder="SenderEmail"
+                    className={inputClass}
+                    onChange={handleChange}
+                    {...register("senderEmail")}
+                    defaultValue={user?.email}
                   />
                 </div>
                 <div>
@@ -290,6 +312,17 @@ export default function SendParcelForm() {
                     className={inputClass}
                     onChange={handleChange}
                     {...register("receiverPhone")}
+                  />
+                </div>
+                <div>
+                  <p className={labelClass}>Receiver Email Address</p>
+                  <input
+                    required
+                    type="email"
+                    placeholder="Receiver Email"
+                    className={inputClass}
+                    onChange={handleChange}
+                    {...register("receiverEmail")}
                   />
                 </div>
                 <div>

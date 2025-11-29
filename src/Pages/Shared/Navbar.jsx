@@ -20,6 +20,29 @@ export default function Navbar() {
       });
   };
 
+  const links = [
+    <NavLink
+      to="sendParcel"
+      className={({ isActive }) =>
+        `hover:text-gray-800 transition-colors duration-150 ${
+          isActive && "font-bold border-b"
+        }`
+      }
+    >
+      Send Parcel
+    </NavLink>,
+    <NavLink
+      to="dashboard/my-parcels"
+      className={({ isActive }) =>
+        `hover:text-gray-800 transition-colors duration-150 ${
+          isActive && "font-bold border-b"
+        }`
+      }
+    >
+      My Parcels
+    </NavLink>,
+  ];
+
   return (
     <div className="flex justify-center py-5">
       <nav className="w-full bg-white rounded-2xl px-6 md:px-10 py-3 shadow-sm flex items-center justify-between">
@@ -38,25 +61,8 @@ export default function Navbar() {
 
         {/* Center links */}
         <div className="hidden md:flex items-center lg:gap-8 gap-4 text-sm text-gray-500">
-          {[
-            "Services",
-            "Send Parcel",
-            "About Us",
-            "Pricing",
-            "Blog",
-            "Contact",
-          ].map((item) => (
-            <NavLink
-              key={item}
-              to={`/${item}`}
-              className={({ isActive }) =>
-                `hover:text-gray-800 transition-colors duration-150 ${
-                  isActive && "font-bold border-b"
-                }`
-              }
-            >
-              {item}
-            </NavLink>
+          {links.map((item) => (
+            <p key={item}>{item}</p>
           ))}
         </div>
 

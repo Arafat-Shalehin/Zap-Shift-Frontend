@@ -11,6 +11,8 @@ import PricingCalculator from "../Pages/RoutePages/PricingCalculator";
 import AboutUs from "../Pages/RoutePages/AboutUs";
 import Error404 from "../Pages/Shared/Error404";
 import SendParcelForm from "../Pages/RoutePages/SendParcelForm";
+import DashboardLayout from "../Layouts/DashboardLayout";
+import MyParcels from "../Pages/Dashboard/MyParcels";
 
 export const router = createBrowserRouter([
   {
@@ -34,7 +36,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "Send Parcel",
+        path: "sendParcel",
         element: (
           <PrivateRoute>
             <SendParcelForm></SendParcelForm>
@@ -71,5 +73,20 @@ export const router = createBrowserRouter([
         Component: Register,
       },
     ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
+    errorElement: <Error404/>,
+    children: [
+      {
+        path: "my-parcels",
+        Component: MyParcels
+      }
+    ]
   },
 ]);
