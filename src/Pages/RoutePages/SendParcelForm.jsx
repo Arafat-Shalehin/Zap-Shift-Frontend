@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IoChevronDown } from "react-icons/io5";
 import toast, { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
@@ -12,11 +12,12 @@ export default function SendParcelForm() {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    // formState: { errors },
   } = useForm();
 
   const axiosSecure = useAxiosSecure();
-  const {user} = useAuth();
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const serviceCenters = useLoaderData();
   //   console.log(serviceCenters);
@@ -56,7 +57,7 @@ export default function SendParcelForm() {
   };
 
   const handleSenderFormSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     const isDocument = data.parcelType === "document";
     const sameDistrict = data.senderDistrict === data.receiverDistrict;
     const parcelWeight = parseFloat(data.parcelWeight);
@@ -75,7 +76,9 @@ export default function SendParcelForm() {
         cost = minCharge + extraCharge;
       }
     }
-    console.log(cost);
+    // console.log(cost);
+    data.cost = cost;
+    
     Swal.fire({
       title: "Agree with the cost?",
       text: `You will be charged ${cost} taka!`,
@@ -86,10 +89,19 @@ export default function SendParcelForm() {
       confirmButtonText: "Yes!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.post("/parcels", data)
-        .then(res => {
+        axiosSecure.post("/parcels", data).then((res) => {
           console.log("After saving parcels", res.data);
-        })
+          if (res.data.data.insertedId) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Parcel has been created. Please Pay.",
+              showConfirmButton: false,
+              timer: 2500,
+            });
+            navigate("/dashboard/my-parcels");
+          }
+        });
         toast.success("Parcel will be sent to designated location.");
       }
     });

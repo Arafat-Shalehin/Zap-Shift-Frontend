@@ -43,6 +43,20 @@ const MyParcels = () => {
       }
     });
   };
+
+  // Did not check by running it
+  const handlePay = async (parcel) => {
+    const paymentInfo = {
+      parcelId: parcel._id,
+      parcelName: parcel.parcelName,
+      cost: parcel.cost,
+      senderEmail: parcel.senderEmail,
+    };
+    const res = await axiosSecure.post("/payment-checkout-session", paymentInfo);
+    console.log(res.data);
+    window.location.assign(res.data.url);
+  };
+
   return (
     <div>
       <h1>All of my parcels: {parcels.length}</h1>
@@ -56,7 +70,8 @@ const MyParcels = () => {
               <th>Type</th>
               <th>Weight</th>
               <th>Cost</th>
-              <th>Payment Status</th>
+              <th>Payment</th>
+              <th>Delivery Status</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -67,7 +82,20 @@ const MyParcels = () => {
                 <td>{parcel.parcelName}</td>
                 <td>{parcel.parcelType}</td>
                 <td>{parcel.parcelWeight}</td>
-                <td>Cost</td>
+                <td>{parcel.cost}</td>
+                <td>
+                  {parcel.paymentStatus === "paid" ? (
+                    <span className="text-green-600 font-semibold">Paid</span>
+                  ) : (
+                    // <Link
+                    // to={`/dashboard/payment/${parcel._id}`}>
+                    //   <button className="btn btn-sm btn-primary text-black">Pay</button>
+                    // </Link>
+                    <button onClick={() => handlePay(parcel)} className="btn btn-sm btn-primary text-black">
+                      Pay
+                    </button>
+                  )}
+                </td>
                 <td>Pending</td>
                 <td className="flex items-center gap-2">
                   <button className="btn btn-square hover:bg-primary">

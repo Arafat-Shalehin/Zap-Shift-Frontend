@@ -93,7 +93,7 @@ export default function FAQSection() {
         </div>
 
         {/* See more button */}
-        <div className="mt-8 flex justify-center">
+        <div className="mt-16 flex justify-center">
           <button className="flex items-center gap-3 px-6 md:px-8 py-3 rounded-full bg-primary text-sm md:text-[15px] font-semibold text-gray-900 shadow-sm hover:bg-lime-300 transition-colors">
             See More FAQ&apos;s
             <span className="w-8 h-8 flex items-center justify-center rounded-full bg-black text-white">
